@@ -1,0 +1,25 @@
+{
+  "name": "configurable-validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thankjnvv/configurable-validator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thankjnvv/configurable-validator/issues"
+  },
+  "homepage": "https://github.com/Thankjnvv/configurable-validator#readme",
+  "dependencies": {
+    "@types/lodash": "^4.14.149",
+    "lodash": "^4.17.15"
+  }
+}

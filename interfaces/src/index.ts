@@ -9,3 +9,16 @@ export interface Validation extends BasicValidation {
     description: string;
     condition?: BasicValidation;
 }
+
+export interface BasicValidationResult {
+    result: boolean;
+    meta: object;
+}
+
+we need to install typescript here
+
+export interface IValidationModule<T> {
+    new(): IValidationModule<T>;
+    init?(itemsToValidate: T[], data?: any): void;
+    validate(item: T, validations: Validation[], data?: any): BasicValidationResult;
+}
