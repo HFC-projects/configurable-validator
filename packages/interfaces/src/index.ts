@@ -15,8 +15,6 @@ export interface BasicValidationResult {
     meta: object;
 }
 
-we need to install typescript here
-
 export interface IValidationModule<T> {
     new(): IValidationModule<T>;
     init?(itemsToValidate: T[], data?: any): void;
