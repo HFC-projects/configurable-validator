@@ -1,4 +1,4 @@
-import { Validation, ValidationOptions } from "./interfaces";
+import { ValidationOptions, ConstraintsMapping } from "./interfaces";
 import { ModuleFactory } from "./module-factory";
 
 export class Validator {
@@ -6,15 +6,9 @@ export class Validator {
         
     }
 
-    public validate<T>(objectsToValidate: T[], validations: Validation[], options?: ValidationOptions, data?: any)
-    public validate<T>(objectsToValidate: T[], validations: Validation[], data?: any)
-    public validate<T>(objectsToValidate: T[], validations: Validation[], options?: ValidationOptions) {
-
-    }
-
-    public validateId<T>(objectsToValidate: T[], validationIds: string[], options?: ValidationOptions, data?: any)
-    public validateId<T>(objectsToValidate: T[], validationIds: string[], data?: any)
-    public validateId<T>(objectsToValidate: T[], validationIds: string[], options?: ValidationOptions) {
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping[], options?: ValidationOptions, data?: any)
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping[], data?: any)
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping[], options?: ValidationOptions) {
 
     }
 }

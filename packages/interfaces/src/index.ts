@@ -1,22 +1,45 @@
-export interface BasicValidation {
-    module: string;
-    config?: any;
-    type: 'single' | 'bulk';
-    transformation?: any;
+export type ConstraintConfiguration = Partial<Record<string,any>> & {
+    __discriminator: "ConstraintConfiguration"
+    __prerequisites?: ConstraintsMapping
 }
 
-export interface Validation extends BasicValidation {
+export function instanceOfConstraintConfiguration(object: any): object is ConstraintConfiguration {
+    return (object as ConstraintConfiguration).__discriminator !== undefined;
+}
+
+export type ConstraintValue = boolean | string | number | ConstraintConfiguration;
+
+export interface ConstraintsMapping {
+    [path: string] : {
+        [constraintName: string] : ConstraintValue,
+    } & {
+        __and?: (string | ConstraintsMapping)[]
+        __or?: (string | ConstraintsMapping)[]
+    }
+}
+
+/**
+ * This interface contains relevant references for the execution of the constraints such as the reference to '__self' object and '__parent' runtimecontext
+ */
+export interface IRuntimeContext {
+    fullPath: string;
+}
+
+export interface ValidationError {
     description: string;
-    condition?: BasicValidation;
+    path: string,
+    constraintName: string,
+    constraintConfig: ConstraintValue
+    meta?: object;
 }
 
-export interface BasicValidationResult {
+export interface ValidationResult {
     result: boolean;
-    meta: object;
+    validationErrors?: ValidationError[];
 }
 
-export interface IValidationModule<T> {
-    new(): IValidationModule<T>;
-    init?(itemsToValidate: T[], data?: any): void;
-    validate(item: T, validations: Validation[], data?: any): BasicValidationResult;
+export type ConstraintExecuter = (data: object, context: IRuntimeContext) => ValidationResult;
+
+export interface IConstraintModule {
+    buildConstraintExecuter(value: ConstraintValue, externalData?: any) : ConstraintExecuter;
 }
