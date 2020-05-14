@@ -11,8 +11,8 @@
     "compile": "tsc -p tsconfig.build.json",
     "clean": "rimraf ./dist",
     "prepublish": "npm run build",
-    "test": "mocha -r ts-node/register tests/**/*.test.ts",
-    "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test"
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts",
+    "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" npm run test"
   },
   "dependencies": {
     "@configurable-validator/core": "^0.0.1",
