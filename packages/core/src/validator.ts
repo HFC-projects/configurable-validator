@@ -1,14 +1,10 @@
-import { ValidationOptions, ConstraintsMapping } from "./interfaces";
-import { ModuleFactory } from "./module-factory";
+import { ValidationOptions, IValidator, ConstraintsMapping } from "./interfaces";
 
-export class Validator {
-    constructor(private moduleFactory: ModuleFactory) {
-        
-    }
+export class Validator implements IValidator {
 
-    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping[], options?: ValidationOptions, data?: any)
-    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping[], data?: any)
-    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping[], options?: ValidationOptions) {
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions, data?: any)
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, data?: any)
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions) {
 
     }
 }

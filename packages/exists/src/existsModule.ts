@@ -1,6 +1,10 @@
-import { IConstraintModule, ConstraintValue, ConstraintExecuter, IRuntimeContext, instanceOfConstraintConfiguration, ValidationError} from '@configurable-validator/interfaces'
 
-export class ExistsModule implements IConstraintModule{
+import { IConstraintModule, ConstraintValue, ConstraintExecuter, IRuntimeContext, ValidationError, IValidator, ConstraintConfiguration } from '@configurable-validator/core'
+
+export class ExistsModule implements IConstraintModule {
+
+    initialize(validator: IValidator) {
+    }
 
     buildConstraintExecuter(value: ConstraintValue, externalData?: any): ConstraintExecuter {
         return (data: object, context: IRuntimeContext) => {
@@ -24,8 +28,8 @@ export class ExistsModule implements IConstraintModule{
                     path: context.fullPath
                 }
             }
-            if(instanceOfConstraintConfiguration(value)) {
-                exists = data.hasOwnProperty(value.path);
+            else {
+                exists = data.hasOwnProperty((value as ConstraintConfiguration).path);
             }
             return {
                 result: true,
