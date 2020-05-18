@@ -11,7 +11,7 @@ export type ConstraintValue = boolean | string | number | ConstraintConfiguratio
 
 export interface ConstraintsMapping {
     [path: string] : {
-        [constraintName: string] : ConstraintValue,
+        [constraintName: string] : ConstraintValue | [ConstraintValue],
     } & {
         __and?: (string | ConstraintsMapping)[]
         __or?: (string | ConstraintsMapping)[]

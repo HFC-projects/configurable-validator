@@ -1,0 +1,1 @@
+export { OfTypeModule } from './ofType';

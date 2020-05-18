@@ -1,5 +1,5 @@
 
-import { IConstraintModule, ConstraintValue, ConstraintExecuter, IRuntimeContext, ValidationError, IValidator, ConstraintConfiguration } from '@configurable-validator/core'
+import { IConstraintModule, ConstraintValue, ConstraintExecuter, IRuntimeContext, ValidationError, IValidator, ConstraintConfiguration, ValidationResult } from '@configurable-validator/core'
 
 export class ExistsModule implements IConstraintModule {
 
@@ -7,7 +7,7 @@ export class ExistsModule implements IConstraintModule {
     }
 
     buildConstraintExecuter(value: ConstraintValue, externalData?: any): ConstraintExecuter {
-        return (data: object, context: IRuntimeContext) => {
+        return (data: object, context: IRuntimeContext) : ValidationResult => {
             let exists: boolean;
             let validationError: ValidationError;
             if(typeof value === "boolean") {
@@ -31,9 +31,15 @@ export class ExistsModule implements IConstraintModule {
             else {
                 exists = data.hasOwnProperty((value as ConstraintConfiguration).path);
             }
-            return {
-                result: true,
+            if(!exists) {
+                return {
+                    result: false,
+                    validationErrors: [validationError]
+                }
             }
+            return {
+                result: true
+            };
         }
     }
 
