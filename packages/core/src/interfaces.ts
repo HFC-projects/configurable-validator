@@ -39,17 +39,25 @@ export interface ValidationResult {
     validationErrors?: ValidationError[];
 }
 
-export type ConstraintExecuter = (data: object, context: IRuntimeContext) => ValidationResult;
+export type ConstraintExecuter = (data: object, context: IRuntimeContext) => ValidationResult | Promise<ValidationResult>;
 
 export interface IValidator {
-    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions, data?: any) : ValidationResult;
-    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, data?: any) : ValidationResult;
-    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions) : ValidationResult;
+    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions, data?: any): Promise<ValidationResult>;
+    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, data?: any): Promise<ValidationResult>;
+    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions): Promise<ValidationResult>;
 }
 
 export interface IConstraintModule {
 
-    initialize(validator: IValidator)
+    initialize?(validator: IValidator): void | Promise<void>;
 
     buildConstraintExecuter(value: ConstraintValue, externalData?: any) : ConstraintExecuter;
+}
+
+export interface ConstraintConstructor<T extends IConstraintModule = IConstraintModule> {
+    new(): T;
+}
+
+export interface IConstraintModulesFactory {
+    create(constraintName: string, validator: IValidator): Promise<IConstraintModule>;
 }

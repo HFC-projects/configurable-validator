@@ -18,8 +18,7 @@ export class ExistsModule implements IConstraintModule {
                     description: 'object does not exist',
                     path: context.fullPath
                 }
-            }
-            if(typeof value === "string") {
+            } else if (typeof value === "string") {
                 exists = data.hasOwnProperty(value);
                 validationError = {
                     constraintName: 'exists',
@@ -27,8 +26,7 @@ export class ExistsModule implements IConstraintModule {
                     description: 'object does not exist',
                     path: context.fullPath
                 }
-            }
-            else {
+            } else {
                 exists = data.hasOwnProperty((value as ConstraintConfiguration).path);
             }
             if(!exists) {

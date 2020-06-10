@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import {ExistsModule} from '../src'
+import {FormatModule} from '../src'
 
-describe('existsModule', () => {
+describe('FormatModule', () => {
     it('shouldCreate', () => {
-        const existsModule = new ExistsModule()
-        expect(existsModule).not.to.be.null;
+        const formatModule = new FormatModule()
+        expect(formatModule).not.to.be.null;
     }); 
 });

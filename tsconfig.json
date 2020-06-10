@@ -7,6 +7,6 @@
 				"packages/*/src"
 			]
 		},
-		"outDir": "./dist"
+    "outDir": "./dist"
 	}
 }
