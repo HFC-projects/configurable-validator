@@ -1,4 +1,5 @@
 import { expect } from "chai";
+
 import {
     ConstraintModulesFactory,
     Validator,
@@ -7,7 +8,7 @@ import {
     LazyConstraintModulesFactory,
 } from "../src";
 
-describe("validator", () => {
+describe("Validator", () => {
     it("should pass all inputs correctly", async () => {
         class TestingAllValues<T> implements IConstraintModule {
             buildConstraintExecuter(expectedValue: T): ConstraintExecuter {
@@ -29,7 +30,7 @@ describe("validator", () => {
 
         expect(result.result).to.be.true;
     });
-    
+
     it("should load constraints when running in lazy mode", async () => {
         const validator = new Validator(
             new LazyConstraintModulesFactory({
@@ -40,7 +41,7 @@ describe("validator", () => {
                 }),
             })
         );
-        
+
         const result = await validator.validate([{a: 3}], {a: {exists: true}});
 
         expect(result.result).to.be.true;

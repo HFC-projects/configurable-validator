@@ -1,0 +1,1 @@
+export { EqualsModule } from './equals';

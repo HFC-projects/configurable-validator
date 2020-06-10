@@ -1,70 +1,45 @@
+import * as _ from "lodash";
 
-import * as _ from 'lodash';
+import {
+    IConstraintModule,
+    ConstraintExecuter,
+    IRuntimeContext,
+    IValidator,
+    ConstraintConfiguration,
+    ConstraintsMapping,
+    ValidationError,
+} from "@configurable-validator/core";
 
-import { IConstraintModule, ConstraintValue, ConstraintExecuter, IRuntimeContext, ValidationError, IValidator, ConstraintConfiguration } from '@configurable-validator/core'
+export interface OrModuleConfiguration extends ConstraintConfiguration {
+    constraints: ConstraintsMapping[];
+}
 
 export class OrModule implements IConstraintModule {
+    private validator: IValidator;
 
     initialize(validator: IValidator) {
+        this.validator = validator;
     }
 
-    buildConstraintExecuter(value: ConstraintValue, externalData?: any): ConstraintExecuter {
-        return (data: object, context: IRuntimeContext) => {
-            let result : boolean = true;
-            let validationError : ValidationError;
+    buildConstraintExecuter(config: OrModuleConfiguration): ConstraintExecuter {
+        return async (data: object, context: IRuntimeContext) => {
+            const validationErrors: ValidationError[] = [];
+            for (const constraintsMapping of config.constraints) {
+                const result = await this.validator.validate([data], constraintsMapping, { parentContext: context });
 
-            if(value === 'string' && !_.isString(data)){
-                return {
-                    result: false,
-                    validationErrors: [{
-                        constraintName: 'ofType',
-                        constraintConfig: value,
-                        description: 'object is not a string',
-                        path: context.fullPath
-                    }]
+                if (result.result) {
+                    return result;
                 }
-            }
 
-            if(value === 'number' && !_.isInteger(data)) {
-                return {
-                    result: false,
-                    validationErrors: [{
-                        constraintName: 'ofType',
-                        constraintConfig: value,
-                        description: 'object is not a number',
-                        path: context.fullPath
-                    }]
-                }
-            }
-
-            if(value === 'boolean' && !_.isBoolean(data)) {
-                return {
-                    result: false,
-                    validationErrors: [{
-                        constraintName: 'ofType',
-                        constraintConfig: value,
-                        description: 'object is not a boolean',
-                        path: context.fullPath
-                    }]
-                }
-            }
-
-            if(value === 'date' && !_.isDate(data)) {
-                return {
-                    result: false,
-                    validationErrors: [{
-                        constraintName: 'ofType',
-                        constraintConfig: value,
-                        description: 'object is not a date',
-                        path: context.fullPath
-                    }]
+                if (result.validationErrors != null) {
+                    validationErrors.push(...result.validationErrors);
                 }
             }
 
             return {
-                result: true
+                result: false,
+                validationErrors,
             };
-        }
+        };
     }
-
 }

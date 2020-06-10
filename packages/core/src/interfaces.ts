@@ -1,6 +1,7 @@
 export interface ValidationOptions {
     abortOnValidationError?: boolean;
     runSerially?: boolean;
+    parentContext: IRuntimeContext;
 }
 
 export interface ConstraintConfiguration {
@@ -8,6 +9,7 @@ export interface ConstraintConfiguration {
     __prerequisites?: ConstraintsMapping;
 }
 
+export type ConstraintBasicValue = boolean | string | number;
 export type ConstraintValue = boolean | string | number | ConstraintConfiguration;
 
 export interface ConstraintsMapping {
