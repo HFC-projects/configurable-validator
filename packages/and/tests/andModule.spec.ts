@@ -9,7 +9,6 @@ import {Validator, ConstraintExecuter} from '@configurable-validator/core'
 describe('existsModule', () => {
 
     let validator: Validator;
-    const 
 
     beforeEach(() => {
         const validatorMock : Validator = mock(Validator)
@@ -45,7 +44,7 @@ describe('existsModule', () => {
             validation2: true
         });
 
-        constraitChecker()
+        constraitChecker();
 
     });
 
