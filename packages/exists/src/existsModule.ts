@@ -11,7 +11,7 @@ export class ExistsModule implements IConstraintModule {
             let exists: boolean;
             let validationError: ValidationError;
             if(typeof value === "boolean") {
-                exists = (data != undefined) == value;
+                exists = (data !== undefined) == value;
                 validationError = {
                     constraintName: 'exists',
                     constraintConfig: value,
@@ -33,12 +33,12 @@ export class ExistsModule implements IConstraintModule {
             }
             if(!exists) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [validationError]
                 }
             }
             return {
-                result: true
+                isValid: true
             };
         }
     }
