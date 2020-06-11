@@ -6,6 +6,9 @@ const a : ConstraintsMapping = {
     },
     "path.to.collection" : {
         uniqueBy: ["key.property.path", "key2"],
+        or: {
+            constraints: [{ __self: { length: 3 }}, { __self: { length: 4 }}, { __self: { length: 2 }}],
+        },
         length: {
             max: 100,
             min: {

@@ -27,7 +27,7 @@ export class OrModule implements IConstraintModule {
             for (const constraintsMapping of config.constraints) {
                 const result = await this.validator.validate([data], constraintsMapping, { parentContext: context });
 
-                if (result.result) {
+                if (result.isValid) {
                     return result;
                 }
 
@@ -37,7 +37,7 @@ export class OrModule implements IConstraintModule {
             }
 
             return {
-                result: false,
+                isValid: false,
                 validationErrors,
             };
         };

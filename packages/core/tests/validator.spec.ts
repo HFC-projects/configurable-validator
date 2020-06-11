@@ -15,7 +15,7 @@ describe("Validator", () => {
                 return (value: any) => {
                     expect(value).to.equal(expectedValue);
                     return {
-                        result: true,
+                        isValid: true,
                     };
                 };
             }
@@ -28,7 +28,7 @@ describe("Validator", () => {
 
         const result = await validator.validate([{ a: 3 }], { a: { equals: 3 } });
 
-        expect(result.result).to.be.true;
+        expect(result.isValid).to.be.true;
     });
 
     it("should load constraints when running in lazy mode", async () => {
@@ -36,7 +36,7 @@ describe("Validator", () => {
             new LazyConstraintModulesFactory({
                 exists: () => Promise.resolve(class implements IConstraintModule {
                     buildConstraintExecuter() {
-                        return () => ({result: true});
+                        return () => ({ isValid: true });
                     }
                 }),
             })
@@ -44,6 +44,6 @@ describe("Validator", () => {
 
         const result = await validator.validate([{a: 3}], {a: {exists: true}});
 
-        expect(result.result).to.be.true;
+        expect(result.isValid).to.be.true;
     });
 });

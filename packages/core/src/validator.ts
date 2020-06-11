@@ -17,13 +17,13 @@ export class Validator implements IValidator {
         for (const objectToValidate of objectsToValidate) {
             const result = await this.validateItem(objectToValidate, constraints, options, data);
 
-            if (!result.result) {
+            if (!result.isValid) {
                 return result;
             }
         }
 
         return {
-            result: true,
+            isValid: true,
         };
     }
 
@@ -48,7 +48,7 @@ export class Validator implements IValidator {
                         data
                     );
                     
-                    if (!result.result) {
+                    if (!result.isValid) {
                         return result;
                     }
                 }
@@ -56,14 +56,14 @@ export class Validator implements IValidator {
                 const fullPath = options?.parentContext ? `${options.parentContext}.${path}` : path;
                 const result = await executor(valueToValidate, { fullPath });
 
-                if (!result.result) {
+                if (!result.isValid) {
                     return result;
                 }
             }
         }
 
         return {
-            result: true,
+            isValid: true,
         };
     }
 

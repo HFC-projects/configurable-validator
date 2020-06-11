@@ -18,7 +18,7 @@ export class EqualsModule implements IConstraintModule {
             const value = _.isObject(configOrValue) ? configOrValue.value : configOrValue;
             if (!_.isEqual(data, value)) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintConfig: {value},
                         constraintName: "equals",
@@ -30,7 +30,7 @@ export class EqualsModule implements IConstraintModule {
             }
             
             return {
-                result: true,
+                isValid: true,
             };
         };
     }

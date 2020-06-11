@@ -16,7 +16,7 @@ export class ForEachModule implements IConstraintModule {
         return (data: object, context: IRuntimeContext) => {
             const array = data as Array<object>;
 
-            return this._validator.validate(array, config);
+            return this._validator.validate(array, config, { parentContext: context });
         }
     }
 

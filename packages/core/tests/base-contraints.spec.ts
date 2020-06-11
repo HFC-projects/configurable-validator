@@ -18,7 +18,7 @@ describe("Validator", () => {
                 a: { or: { constraints: [{ __self: { equals: 2 } }, { __self: { equals: 3 } }] } },
             });
     
-            expect(result.result).to.be.true;
+            expect(result.isValid).to.be.true;
         });
     });
 });

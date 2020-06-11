@@ -14,10 +14,7 @@ export type ConstraintValue = boolean | string | number | ConstraintConfiguratio
 
 export interface ConstraintsMapping {
     [path: string] : {
-        [constraintName: string] : ConstraintValue | [ConstraintValue],
-    } & {
-        __and?: (string | ConstraintsMapping)[]
-        __or?: (string | ConstraintsMapping)[]
+        [constraintName: string] : ConstraintValue | Record<string, ConstraintValue>,
     }
 }
 
@@ -37,7 +34,7 @@ export interface ValidationError {
 }
 
 export interface ValidationResult {
-    result: boolean;
+    isValid: boolean;
     validationErrors?: ValidationError[];
 }
 
@@ -50,10 +47,8 @@ export interface IValidator {
 }
 
 export interface IConstraintModule {
-
     initialize?(validator: IValidator): void | Promise<void>;
-
-    buildConstraintExecuter(value: ConstraintValue, externalData?: any) : ConstraintExecuter;
+    buildConstraintExecuter(value: ConstraintValue, externalData?: any): ConstraintExecuter;
 }
 
 export interface ConstraintConstructor<T extends IConstraintModule = IConstraintModule> {

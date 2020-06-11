@@ -1,1 +1,1 @@
-export { AndModule } from './and';
+export { AndModule } from './andModule';
