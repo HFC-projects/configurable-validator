@@ -10,12 +10,9 @@ export class OfTypeModule implements IConstraintModule {
 
     buildConstraintExecuter(value: ConstraintValue, externalData?: any): ConstraintExecuter {
         return (data: object, context: IRuntimeContext) => {
-            let result : boolean = true;
-            let validationError : ValidationError;
-
             if(value === 'string' && !_.isString(data)){
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -27,7 +24,7 @@ export class OfTypeModule implements IConstraintModule {
 
             if(value === 'number' && !_.isInteger(data)) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -39,7 +36,7 @@ export class OfTypeModule implements IConstraintModule {
 
             if(value === 'boolean' && !_.isBoolean(data)) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -51,7 +48,7 @@ export class OfTypeModule implements IConstraintModule {
 
             if(value === 'date' && !_.isDate(data)) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -62,7 +59,7 @@ export class OfTypeModule implements IConstraintModule {
             }
 
             return {
-                result: true
+                isValid: true
             };
         }
     }
