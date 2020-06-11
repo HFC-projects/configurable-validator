@@ -32,7 +32,7 @@ export interface ValidationError {
 }
 
 export interface ValidationResult {
-    result: boolean;
+    isValid: boolean;
     validationErrors?: ValidationError[];
 }
 
