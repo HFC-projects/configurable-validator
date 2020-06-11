@@ -15,7 +15,7 @@ export class AnyModule implements IConstraintModule {
 
             if(value === 'string' && !_.isString(data)){
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -27,7 +27,7 @@ export class AnyModule implements IConstraintModule {
 
             if(value === 'number' && !_.isInteger(data)) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -39,7 +39,7 @@ export class AnyModule implements IConstraintModule {
 
             if(value === 'boolean' && !_.isBoolean(data)) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -51,7 +51,7 @@ export class AnyModule implements IConstraintModule {
 
             if(value === 'date' && !_.isDate(data)) {
                 return {
-                    result: false,
+                    isValid: false,
                     validationErrors: [{
                         constraintName: 'ofType',
                         constraintConfig: value,
@@ -62,7 +62,7 @@ export class AnyModule implements IConstraintModule {
             }
 
             return {
-                result: true
+                isValid: true
             };
         }
     }
