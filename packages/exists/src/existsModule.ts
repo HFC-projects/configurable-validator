@@ -19,7 +19,7 @@ export class ExistsModule implements IConstraintModule {
                     path: context.fullPath
                 }
             }
-            if(typeof value === "string") {
+            else if(typeof value === "string") {
                 exists = data.hasOwnProperty(value);
                 validationError = {
                     constraintName: 'exists',
