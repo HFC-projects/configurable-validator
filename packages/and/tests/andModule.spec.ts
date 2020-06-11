@@ -4,7 +4,7 @@ import {AndModule} from '../src'
 
 import {Validator, ConstraintExecuter} from '@configurable-validator/core'
 
-describe('existsModule', () => {
+describe('AndModule', () => {
     
     let validatorMock: Validator;
 
