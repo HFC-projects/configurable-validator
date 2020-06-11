@@ -46,7 +46,7 @@ export interface IValidator {
 
 export interface IConstraintModule {
 
-    initialize(validator: IValidator)
+    initialize(validator: IValidator) : void | Promise<void>;
 
     buildConstraintExecuter(value: ConstraintValue, externalData?: any) : ConstraintExecuter;
 }
