@@ -1,25 +1,22 @@
 import { expect } from 'chai';
-
-import { mock, when } from 'ts-mockito';
-
+import * as sinon from 'sinon'
 import {AndModule} from '../src'
 
 import {Validator, ConstraintExecuter} from '@configurable-validator/core'
 
 describe('existsModule', () => {
-
-    let validator: Validator;
+    
+    let validatorMock: Validator;
 
     beforeEach(() => {
-        const validatorMock : Validator = mock(Validator)
-        when(validatorMock.validate()).
+        validatorMock = sinon.mock(Validator)
     })
-
+  
     it('should initialize', () => {
         const andModule = new AndModule()
         expect(andModule).not.to.be.null;
 
-        andModule.initialize(validator);
+        andModule.initialize(validatorMock);
 
         expect(andModule).not.to.throw();
     });
@@ -37,7 +34,7 @@ describe('existsModule', () => {
         const andModule = new AndModule()
         expect(andModule).not.to.be.null;
 
-        andModule.initialize(validator);
+        andModule.initialize(validatorMock);
 
         const constraitChecker : ConstraintExecuter = andModule.buildConstraintExecuter({
             validation1: true,
