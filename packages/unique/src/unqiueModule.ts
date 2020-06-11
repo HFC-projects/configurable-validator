@@ -14,9 +14,12 @@ export class UnqiueModule implements IConstraintModule {
         const config = value as ConstraintConfiguration;
 
         return (data: object, context: IRuntimeContext) => {
-            const array = data as Array<object>;
 
-            return this._validator.validate(array, config);
+            //TODO: implement unique module
+
+            return {
+                isValid: true
+            }
         }
     }
 
