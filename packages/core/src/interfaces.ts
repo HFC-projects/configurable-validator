@@ -3,8 +3,9 @@ export interface ValidationOptions {
     runSerially?: boolean;
 }
 
-export type ConstraintConfiguration = Partial<Record<string,any>> & {
-    __prerequisites?: ConstraintsMapping
+export interface ConstraintConfiguration {
+    [key: string]: any;
+    __prerequisites?: ConstraintsMapping;
 }
 
 export type ConstraintValue = boolean | string | number | ConstraintConfiguration;
