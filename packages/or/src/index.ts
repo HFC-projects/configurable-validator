@@ -1,1 +1,1 @@
-export { OrModule } from './or';
+export { OrModule } from './orModule';
