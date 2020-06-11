@@ -13,7 +13,7 @@ describe('existsModule', () => {
     })
   
     it('should initialize', () => {
-        const andModule = new AndModule()
+        const andModule = new AndModule();
         expect(andModule).not.to.be.null;
 
         andModule.initialize(validatorMock);
@@ -22,8 +22,7 @@ describe('existsModule', () => {
     });
 
     it('should throw without validator', () => {
-        const andModule = new AndModule()
-        expect(andModule).not.to.be.null;
+        const andModule = new AndModule();
 
         andModule.initialize(null);
 
@@ -31,8 +30,7 @@ describe('existsModule', () => {
     });
     
     it('should build a constraint executer', () => {
-        const andModule = new AndModule()
-        expect(andModule).not.to.be.null;
+        const andModule = new AndModule();
 
         andModule.initialize(validatorMock);
 
