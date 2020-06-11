@@ -1,20 +1,11 @@
-import { Validation, ValidationOptions } from "./interfaces";
-import { ModuleFactory } from "./module-factory";
+import { ValidationOptions, IValidator, ConstraintsMapping, ValidationResult } from "./interfaces";
 
-export class Validator {
-    constructor(private moduleFactory: ModuleFactory) {
-        
-    }
+export class Validator implements IValidator {
 
-    public validate<T>(objectsToValidate: T[], validations: Validation[], options?: ValidationOptions, data?: any)
-    public validate<T>(objectsToValidate: T[], validations: Validation[], data?: any)
-    public validate<T>(objectsToValidate: T[], validations: Validation[], options?: ValidationOptions) {
 
-    }
-
-    public validateId<T>(objectsToValidate: T[], validationIds: string[], options?: ValidationOptions, data?: any)
-    public validateId<T>(objectsToValidate: T[], validationIds: string[], data?: any)
-    public validateId<T>(objectsToValidate: T[], validationIds: string[], options?: ValidationOptions) {
-
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions, data?: any) : ValidationResult
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, data?: any) : ValidationResult
+    public validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions) : ValidationResult {
+        return undefined;
     }
 }

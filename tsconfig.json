@@ -6,6 +6,7 @@
 			"@configurable-validator/*": [
 				"packages/*/src"
 			]
-		}
+		},
+		"outDir": "./dist"
 	}
 }

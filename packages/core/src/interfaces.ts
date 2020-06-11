@@ -3,26 +3,50 @@ export interface ValidationOptions {
     runSerially?: boolean;
 }
 
-export interface BasicValidation {
-    module: string;
-    config?: any;
-    type: 'single' | 'bulk';
-    transformation?: any;
+export interface ConstraintConfiguration {
+    [key: string]: any;
+    __prerequisites?: ConstraintsMapping;
 }
 
-export interface Validation extends BasicValidation {
-    description: string;
-    condition?: BasicValidation;
+export type ConstraintValue = boolean | string | number | ConstraintConfiguration;
+
+export interface ConstraintsMapping {
+    [path: string] : {
+        [constraintName: string] : ConstraintValue | Record<string, ConstraintValue>,
+    }
+}
+
+/**
+ * This interface contains relevant references for the execution of the constraints such as the reference to '__self' object and '__parent' runtimecontext
+ */
+export interface IRuntimeContext {
+    fullPath: string;
 }
 
 export interface ValidationError {
-    module: string;
     description: string;
-    meta: object;
+    path: string,
+    constraintName: string,
+    constraintConfig: ConstraintValue
+    meta?: object;
 }
 
-export interface ValidationResult<T> {
-    result: boolean;
-    validationObj: T;
+export interface ValidationResult {
+    isValid: boolean;
     validationErrors?: ValidationError[];
+}
+
+export type ConstraintExecuter = (data: object, context: IRuntimeContext) => ValidationResult;
+
+export interface IValidator {
+    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions, data?: any) : ValidationResult;
+    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, data?: any) : ValidationResult;
+    validate<T>(objectsToValidate: T[], constraints: ConstraintsMapping, options?: ValidationOptions) : ValidationResult;
+}
+
+export interface IConstraintModule {
+
+    initialize(validator: IValidator) : void | Promise<void>;
+
+    buildConstraintExecuter(value: ConstraintValue, externalData?: any) : ConstraintExecuter;
 }

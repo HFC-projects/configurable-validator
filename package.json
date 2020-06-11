@@ -16,10 +16,12 @@
     "postinstall": "npm run bootstrap",
     "clean": "lerna run clean",
     "build": "lerna run build",
-    "pub": "lerna publish"
+    "pub": "lerna publish",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "lerna": "^3.20.2",
-    "typescript": "~3.4.5"
+    "rimraf": "latest",
+    "typescript": "^3.9.2"
   }
 }
